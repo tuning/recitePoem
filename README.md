@@ -20,4 +20,4 @@
 	
 - Notes:
 
-	-Currently supports UTF-8 only for Chinese characters.
+	- Currently supports UTF-8 only for Chinese characters.
