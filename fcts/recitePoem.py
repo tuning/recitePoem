@@ -52,12 +52,15 @@ def recitePoem(options):
 
 def selectPoem(record, options):
     nPoemRecite = options['nPrevPoems']
+    if nPoemRecite > 6:
+        print('Gee that is too much! Six titles recommended.')
+        nPoemRecite = 6
     nPoem = len(record.index)
     nDays = (np.array(record.loc[:,'sinceLastDate']+1))**2
     nRevs = np.array(record.loc[:,'nReviews'])+1
     prob = nDays/nRevs
     prob = prob/sum(prob)
-    probIdx = np.flip(np.argsort(prob))[:min(6,nPoem)]
+    probIdx = np.flip(np.argsort(prob))[:min(nPoemRecite,nPoem)]
     poemIdx = probIdx[np.random.permutation(len(probIdx))[:nPoemRecite]]
     
     print("Today's "+str(nPoemRecite)+" poem(s) to review:")

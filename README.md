@@ -21,3 +21,5 @@
 - Notes:
 
 	- Currently supports UTF-8 only for Chinese characters.
+	
+	- 6 titles at most per time (more than 6? You are insane XD).
