@@ -36,14 +36,18 @@ def recitePoem(options):
         cols = ['iPoem','Poem','nReviews','lastDate','sinceLastDate']
         record = record[cols]
     
+    # update days since last review
+    for i in record.index:
+        lastDate = record.iloc[i,record.columns.get_loc('lastDate')]
+        record.iloc[i,record.columns.get_loc('sinceLastDate')] = daysBetween(todayDate, lastDate)
+
     poemIdx = selectPoem(record, options)
     
     # update today's review
     for i in range(len(poemIdx)):
         record.iloc[poemIdx[i],record.columns.get_loc('nReviews')] += 1
-        lastDate = record.iloc[poemIdx[i],record.columns.get_loc('lastDate')]
-        record.iloc[poemIdx[i],record.columns.get_loc('sinceLastDate')] = daysBetween(todayDate, lastDate)
-        record.iloc[poemIdx[i],record.columns.get_loc('lastDate')] = todayDate 
+        record.iloc[poemIdx[i],record.columns.get_loc('lastDate')] = todayDate
+        record.iloc[poemIdx[i],record.columns.get_loc('sinceLastDate')] = 0
         
     # save to file
     with open(resultFile, 'wb') as f:
