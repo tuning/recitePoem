@@ -71,7 +71,7 @@ def selectPoem(record, options):
         nPoemShuffle = nPoem
     if nPoem < nPoemRecite:
         nPoemRecite = nPoem
-    probIdx = np.flip(np.argsort(prob))[:nPoemShuffle]
+    probIdx = np.flip(np.argsort(prob), axis=0)[:nPoemShuffle]
     if verbFlag:
         print('Select from '+str(len(probIdx))+' poems.')
     poemIdx = probIdx[np.random.permutation(len(probIdx))[:nPoemRecite]]
