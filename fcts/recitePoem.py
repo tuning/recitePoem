@@ -61,8 +61,8 @@ def selectPoem(record, options):
         print('Gee that is too much! Six titles will be recommended.')
         nPoemRecite = 6
     nPoem = len(record.index)
-    nDays = (np.array(record.loc[:,'sinceLastDate']+1))**2
-    nRevs = np.array(record.loc[:,'nReviews'])+1
+    nDays = (np.array(record.loc[:,'sinceLastDate']+1))**1
+    nRevs = np.array(record.loc[:,'nReviews'])+0.01
     prob = nDays/nRevs
     prob = prob/sum(prob)
     nPoemShuffle = int(np.ceil(1.5*nPoemRecite))
