@@ -65,7 +65,7 @@ def selectPoem(record, options):
     nRevs = np.array(record.loc[:,'nReviews'])+0.01
     prob = nDays/nRevs
     prob = prob/sum(prob)
-    nPoemShuffle = int(np.ceil(1.5*nPoemRecite))
+    nPoemShuffle = int(np.ceil(1.0*nPoemRecite))
     # for starters: if nPoem is less than nPoemShuffle
     if nPoem < nPoemShuffle:
         nPoemShuffle = nPoem
