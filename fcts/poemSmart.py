@@ -22,18 +22,22 @@ options['verbosity'] = 0
 recitePoem(options)
 
 # learn new poem
-learnNew = input('Do you want to learn new poem today?[y/n]')
-if len(learnNew) == 0:
-    print('No new poem added.')
-elif learnNew[0] == 'y':
-    newPoemName = input('Please type the name of the poem you are learning:')
-    if len(newPoemName) == 0:
+while True:
+    learnNew = input('Add new poem?[y/N]')
+    if len(learnNew) == 0:
         print('No new poem added.')
+        break
+    elif learnNew[0] == 'y':
+        newPoemName = input('Please type the name of the poem you are learning:')
+        if len(newPoemName) == 0:
+            print('No new poem added.')
+            break
+        else:
+            print('New poem title: '+newPoemName)
+            options['newPoemName'] = newPoemName
+            addPoem(options)
+            print('New poem '+newPoemName+' added to your record.')
     else:
-        print('New poem name: '+newPoemName)
-        options['newPoemName'] = newPoemName
-        addPoem(options)
-        print('New poem '+newPoemName+' added to your record.')
-else:
-    print('No new poem added.')    
+        print('No new poem added.')
+        break
 print('You are done for today. Good job!')
