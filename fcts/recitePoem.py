@@ -19,9 +19,8 @@ def recitePoem(options):
     todayDate = currTime.strftime('%Y-%m-%d')
     
     # load previous data
-    if os.path.exists(resultFile):
-        with open(resultFile, 'rb') as f:
-            record = pickle.load(f)
+    if os.path.exists(resultCSV):
+        record = pd.read_csv(resultCSV)
     else:
         # create initial record file
         poemDict = readPoemList(options['fileName'])
