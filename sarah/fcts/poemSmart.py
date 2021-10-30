@@ -8,9 +8,9 @@ Created on Sat Sep  7 13:08:01 2019
 from recitePoem import recitePoem
 from addPoem import addPoem
 
-options = dict([])
+options = {}
 # number of poems to recite
-options['nPrevPoems'] = 4
+options['nPrevPoems'] = 3
 # list of poems to review
 options['fileName'] = '../data/poemlist.txt'
 # name of result file, will export CSV file

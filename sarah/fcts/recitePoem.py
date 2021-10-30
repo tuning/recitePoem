@@ -8,11 +8,9 @@ import numpy as np
 import pandas as pd
 import os.path
 import datetime
-import pickle
 
 def recitePoem(options):
-            
-    resultFile = options['resultNameBase']+'.pkl'
+
     resultCSV = options['resultNameBase']+'.csv'
     
     currTime = datetime.datetime.now()
@@ -36,21 +34,19 @@ def recitePoem(options):
         record = record[cols]
     
     # update days since last review
-    for i in record.index:
-        lastDate = record.iloc[i,record.columns.get_loc('lastDate')]
-        record.iloc[i,record.columns.get_loc('sinceLastDate')] = daysBetween(todayDate, lastDate)
+    for i in range(record.shape[0]):
+        lastDate = record['lastDate'].iloc[i]
+        record['sinceLastDate'].iloc[i] = daysBetween(todayDate, lastDate)
 
     poemIdx = selectPoem(record, options)
     
     # update today's review
     for i in range(len(poemIdx)):
-        record.iloc[poemIdx[i],record.columns.get_loc('nReviews')] += 1
-        record.iloc[poemIdx[i],record.columns.get_loc('lastDate')] = todayDate
-        record.iloc[poemIdx[i],record.columns.get_loc('sinceLastDate')] = 0
+        record['nReviews'].iloc[poemIdx[i]] += 1
+        record['lastDate'].iloc[poemIdx[i]] = todayDate
+        record['sinceLastDate'].iloc[poemIdx[i]] = 0
         
     # save to file
-    with open(resultFile, 'wb') as f:
-        pickle.dump(record, f)
     record.to_csv(resultCSV, index = False)
 
 def selectPoem(record, options):
@@ -87,7 +83,7 @@ def daysBetween(d1, d2):
     return abs((d2 - d1).days)
 
 def readPoemList(filename):
-    poemDict = dict([])
+    poemDict = {}
     contents = open(filename, encoding="utf8").read()
     poemlist = contents.split('\n')
     print('You are awesome! You can recite '+str(len(poemlist))+' poems now:')
