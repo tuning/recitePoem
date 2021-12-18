@@ -10,7 +10,7 @@ from addPoem import addPoem
 
 options = {}
 # number of poems to recite
-options['nPrevPoems'] = 2
+options['nPrevPoems'] = 3
 # list of poems to review
 options['fileName'] = '../data/poemlist.txt'
 # name of result file, will export CSV file
